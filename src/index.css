@@ -1,12 +1,13 @@
 .css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell {
   white-space: wrap !important;
 }
+/* e2c657 */
 .image-item {
   display: flex;
   margin: 10px 0;
 }
-.swal2-container{
-  z-index:2000 !important;
+.swal2-container {
+  z-index: 2000 !important;
   position: absolute !important;
 }
 .image-item__btn-wrapper {
@@ -17,10 +18,32 @@
 button {
   height: 40px;
 }
+
+.custom_btn {
+  background: #e2c657 !important;
+  border: 2px solid #000000 !important;
+  color: #000 !important;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.custom_btn:hover {
+  background: transparent !important;
+  color: #000000;
+}
 /* .MuiDataGrid-row.Mui-odd {
   background-color: green !important;
 }
 .MuiDataGrid-row:nth-child(even){
   background-color: rgba(144, 238, 180,0.6) !important ;
 
-} */
+
+  
+} 
+*/
+
+.table .css-f3jnds-MuiDataGrid-columnHeaders {
+  background: #e2c657;
+}

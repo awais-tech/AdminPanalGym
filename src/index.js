@@ -1,34 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import Test from './User';
-import SignInSide from './Login';
-import User from './User';
-import Category from './Services/services/CategoryServices';
-import CategoryPage from './Category';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import Test from "./User";
+import SignInSide from "./Login";
+import User from "./User";
+import Category from "./Services/services/CategoryServices";
+import CategoryPage from "./Category";
 
-import SubCateg from './SubCategory';
-import AddEditCategory from './EditCategory';
-import { ToastContainer } from 'react-toastify';
+import SubCateg from "./SubCategory";
+import AddEditCategory from "./EditCategory";
+import { ToastContainer } from "react-toastify";
 
-import 'react-toastify/dist/ReactToastify.css';
-import AddEditSub from './AddEditCategory';
-import BussnessUser from './Bussness';
-import Quiz from './Quiz';
-import PalmistQuiz from './palmistQuiz';
-import AllServices from './AllServices';
-import Booking from './Booking';
-import BussnessA from './BussnessA';
-import AdminBooking from './AdminBooking';
-import AddService from './AddService';
-import SignUp from './CreateTrainer/CreateTrainer';
-import Profile from './CreateTrainer/Profile';
+import "react-toastify/dist/ReactToastify.css";
+import AddEditSub from "./AddEditCategory";
+import BussnessUser from "./Bussness";
+import Quiz from "./Quiz";
+import PalmistQuiz from "./palmistQuiz";
+import AllServices from "./AllServices";
+import Booking from "./Booking";
+import BussnessA from "./BussnessA";
+import AdminBooking from "./AdminBooking";
+import AddService from "./AddService";
+import SignUp from "./CreateTrainer/CreateTrainer";
+import Profile from "./CreateTrainer/Profile";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
@@ -45,19 +45,16 @@ root.render(
         <Route path="/AddSub/:id/:Sub" element={<AddEditSub />} />
         <Route path="/bussness" element={<BussnessUser />} />
         <Route path="/Quiz" element={<Quiz />} />
-        
 
         <Route path="/bussnessA" element={<BussnessA />} />
-        <Route path="/SignUp" element={<  SignUp />} />
-        <Route path="/Profile/:id" element={<  Profile />} />
-        
+        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/Profile/:id" element={<Profile />} />
+
         <Route path="/Services" element={<AddService />} />
-      
+
         <Route path="/Booking" element={<Booking />} />
         <Route path="/AdminBooking" element={<AdminBooking />} />
         <Route path="/allServices" element={<AllServices />} />
-        
-        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

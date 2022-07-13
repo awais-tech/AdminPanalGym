@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import UerServices from "../Services/services/UserServices";
 import { useNavigate } from "react-router-dom";
-
+import { toast } from "react-toastify";
 function Copyright(props) {
   return (
     <Typography
@@ -92,10 +92,10 @@ export default function SignUp() {
           values.phoneNo,
           "trainer"
         );
-
+        toast.success("Account has been created");
         navigate(-1);
       } catch (e) {
-        alert(e.error);
+        toast.error(e.error);
       }
     },
   });
@@ -103,7 +103,7 @@ export default function SignUp() {
   return (
     <App>
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="lg">
           <CssBaseline />
           <Box
             sx={{
@@ -113,7 +113,11 @@ export default function SignUp() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ fontFamily: "fantasy" }}
+            >
               Create Trainer
             </Typography>
 
@@ -124,9 +128,8 @@ export default function SignUp() {
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <TextField
-         
                     name="name"
                     required
                     fullWidth
@@ -139,7 +142,7 @@ export default function SignUp() {
                     helperText={formik.touched.name && formik.errors.name}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -153,7 +156,7 @@ export default function SignUp() {
                     helperText={formik.touched.email && formik.errors.email}
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -171,7 +174,7 @@ export default function SignUp() {
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -190,7 +193,7 @@ export default function SignUp() {
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -211,7 +214,7 @@ export default function SignUp() {
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -225,18 +228,20 @@ export default function SignUp() {
                       formik.touched.phoneNo && Boolean(formik.errors.phoneNo)
                     }
                     helperText={formik.touched.phoneNo && formik.errors.phoneNo}
-             
                   />
                 </Grid>
               </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Create Account
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  className="custom_btn"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ maxWidth: "400px", margin: "13px" }}
+                >
+                  Create Account
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Container>

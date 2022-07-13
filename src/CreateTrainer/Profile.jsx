@@ -19,40 +19,32 @@ import * as Yup from "yup";
 import UerServices from "../Services/services/UserServices";
 import { useNavigate, useParams } from "react-router-dom";
 import bussnessServices from "../Services/services/bussnessuser";
-
-
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 const validation = Yup.object({
-  address: Yup.string()
-               
-  .required("Address is required"),
-  specialist: Yup.string()
+  address: Yup.string().required("Address is required"),
+  specialist: Yup.string().required("specialist is required"),
+  fightName: Yup.string().required("fightName is required"),
+  fightRecord: Yup.number()
+    .positive()
+    .required("fightRecord is required")
+    .typeError("you must specify a number"),
+  titles: Yup.string().required("title is required"),
+  monthyFees: Yup.number()
+    .positive()
+    .min(1, "  Fees must be greater then 0")
+    .required()
+    .typeError("you must specify a number")
 
-  .required("specialist is required"),
-  fightName: Yup.string()
-
-  .required("fightName is required"),
-  fightRecord: Yup.string()
-
-  .required("fightRecord is required"),
-  titles: Yup.string()
-
-  .required("title is required"),
-  monthyFees: Yup.number().min(1,"  Fees must be greater then 0")
-
-  .required("monthyFees is required"),
-  medal: Yup.string()
-
-  .required("medal is required"),
-  about: Yup.string()
-
-  .required("about is required"),
+    .required("monthyFees is required"),
+  medal: Yup.string().required("medal is required"),
+  about: Yup.string().required("about is required"),
 });
 
 export default function Profile() {
   const navigate = useNavigate();
-  const {id}=useParams();
+  const { id } = useParams();
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
   const onChange = (imageList, addUpdateIndex) => {
@@ -66,9 +58,9 @@ export default function Profile() {
       address: "",
       specialist: "",
       fightName: "",
-  
+
       fightRecord: "",
-  
+
       titles: "",
       monthyFees: "",
       medal: "",
@@ -96,16 +88,17 @@ export default function Profile() {
             "content-type": "multipart/form-data",
           },
         };
-  
+
         bussnessServices.addBussness(formData, config).then(() => {
-          UerServices.updateuser(id, 1).then((val)=>{
-          navigate(-1);
-          })
+          UerServices.updateuser(id, 1).then((val) => {
+            navigate(-1);
+          });
         });
 
         navigate(-1);
+        toast.success("Account has been created");
       } catch (e) {
-        alert(e);
+        toast.error(e.error);
       }
     },
   });
@@ -113,7 +106,7 @@ export default function Profile() {
   return (
     <App>
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="lg">
           <CssBaseline />
           <Box
             sx={{
@@ -123,8 +116,12 @@ export default function Profile() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h5">
-              Create Trainer
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ fontFamily: "fantasy" }}
+            >
+              Create Profile
             </Typography>
 
             <Box
@@ -134,9 +131,8 @@ export default function Profile() {
               sx={{ mt: 3 }}
             >
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={12} md={6}>
                   <TextField
-         
                     name="address"
                     required
                     fullWidth
@@ -145,11 +141,13 @@ export default function Profile() {
                     autoFocus
                     value={formik.values.address}
                     onChange={formik.handleChange}
-                    error={formik.touched.address && Boolean(formik.errors.address)}
+                    error={
+                      formik.touched.address && Boolean(formik.errors.address)
+                    }
                     helperText={formik.touched.address && formik.errors.address}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -159,11 +157,16 @@ export default function Profile() {
                     autoComplete="family-name"
                     value={formik.values.specialist}
                     onChange={formik.handleChange}
-                    error={formik.touched.specialist && Boolean(formik.errors.specialist)}
-                    helperText={formik.touched.specialist && formik.errors.specialist}
+                    error={
+                      formik.touched.specialist &&
+                      Boolean(formik.errors.specialist)
+                    }
+                    helperText={
+                      formik.touched.specialist && formik.errors.specialist
+                    }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -174,14 +177,15 @@ export default function Profile() {
                     value={formik.values.fightName}
                     onChange={formik.handleChange}
                     error={
-                      formik.touched.fightName && Boolean(formik.errors.fightName)
+                      formik.touched.fightName &&
+                      Boolean(formik.errors.fightName)
                     }
                     helperText={
                       formik.touched.fightName && formik.errors.fightName
                     }
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -193,79 +197,16 @@ export default function Profile() {
                     value={formik.values.fightRecord}
                     onChange={formik.handleChange}
                     error={
-                      formik.touched.fightRecord && Boolean(formik.errors.fightRecord)
+                      formik.touched.fightRecord &&
+                      Boolean(formik.errors.fightRecord)
                     }
                     helperText={
                       formik.touched.fightRecord && formik.errors.fightRecord
                     }
                   />
                 </Grid>
-           
-                <ImageUploading
-                          value={images}
-                          onChange={onChange}
-                          maxNumber={maxNumber}
-                          dataURLKey="data_url"
-                        >
-                          {({
-                            imageList,
-                            onImageUpload,
-                            onImageRemoveAll,
-                            onImageUpdate,
-                            onImageRemove,
-                            isDragging,
-                            dragProps,
-                          }) => (
-                            // write your building UI
-                            <div className="upload__image-wrapper mt-3">
-                              <button
-                                type="button"
-                                className="btn btn-info"
-                                style={
-                                  isDragging ? { color: "red" } : undefined
-                                }
-                                onClick={onImageUpload}
-                                {...dragProps}
-                              >
-                                Click or Drop here
-                              </button>
-                              &nbsp;
-                              <button
-                                type="button"
-                                className="btn btn-info"
-                                onClick={onImageRemoveAll}
-                              >
-                                Remove all images
-                              </button>
-                              {imageList.map((image, index) => (
-                                <div key={index} className="image-item">
-                                  <img
-                                    src={image["data_url"]}
-                                    alt=""
-                                    width="100"
-                                  />
-                                  <div className="image-item__btn-wrapper">
-                                    <button
-                                      type="button"
-                                      className="btn"
-                                      onClick={() => onImageUpdate(index)}
-                                    >
-                                      Update
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="btn"
-                                      onClick={() => onImageRemove(index)}
-                                    >
-                                      Remove
-                                    </button>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </ImageUploading>
-                <Grid item xs={12}>
+
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -279,10 +220,9 @@ export default function Profile() {
                       formik.touched.titles && Boolean(formik.errors.titles)
                     }
                     helperText={formik.touched.titles && formik.errors.titles}
-             
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -292,14 +232,11 @@ export default function Profile() {
                     id="medal"
                     value={formik.values.medal}
                     onChange={formik.handleChange}
-                    error={
-                      formik.touched.medal && Boolean(formik.errors.medal)
-                    }
+                    error={formik.touched.medal && Boolean(formik.errors.medal)}
                     helperText={formik.touched.medal && formik.errors.medal}
-             
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -309,14 +246,11 @@ export default function Profile() {
                     id="about"
                     value={formik.values.about}
                     onChange={formik.handleChange}
-                    error={
-                      formik.touched.about && Boolean(formik.errors.about)
-                    }
+                    error={formik.touched.about && Boolean(formik.errors.about)}
                     helperText={formik.touched.about && formik.errors.about}
-             
                   />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} md={6}>
                   <TextField
                     required
                     fullWidth
@@ -327,21 +261,87 @@ export default function Profile() {
                     value={formik.values.monthyFees}
                     onChange={formik.handleChange}
                     error={
-                      formik.touched.monthyFees && Boolean(formik.errors.monthyFees)
+                      formik.touched.monthyFees &&
+                      Boolean(formik.errors.monthyFees)
                     }
-                    helperText={formik.touched.monthyFees && formik.errors.monthyFees}
-             
+                    helperText={
+                      formik.touched.monthyFees && formik.errors.monthyFees
+                    }
                   />
                 </Grid>
+                <Grid item xs={12} md={6}>
+                  <ImageUploading
+                    value={images}
+                    onChange={onChange}
+                    maxNumber={maxNumber}
+                    dataURLKey="data_url"
+                  >
+                    {({
+                      imageList,
+                      onImageUpload,
+                      onImageRemoveAll,
+                      onImageUpdate,
+                      onImageRemove,
+                      isDragging,
+                      dragProps,
+                    }) => (
+                      // write your building UI
+                      <div className="upload__image-wrapper mt-3">
+                        <button
+                          type="button"
+                          className="btn btn-info custom_btn"
+                          style={isDragging ? { color: "red" } : undefined}
+                          onClick={onImageUpload}
+                          {...dragProps}
+                        >
+                          Click or Drop here
+                        </button>
+                        &nbsp;
+                        <button
+                          type="button"
+                          className="btn btn-info custom_btn"
+                          onClick={onImageRemoveAll}
+                        >
+                          Remove all images
+                        </button>
+                        {imageList.map((image, index) => (
+                          <div key={index} className="image-item">
+                            <img src={image["data_url"]} alt="" width="100" />
+                            <div className="image-item__btn-wrapper">
+                              <button
+                                type="button"
+                                className="btn custom_btn"
+                                onClick={() => onImageUpdate(index)}
+                                style={{ marginBottom: "10px" }}
+                              >
+                                Update
+                              </button>
+                              <button
+                                type="button"
+                                className="btn custom_btn"
+                                onClick={() => onImageRemove(index)}
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </ImageUploading>
+                </Grid>
               </Grid>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Create Account
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  className="custom_btn"
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, maxWidth: "400px" }}
+                >
+                  Create Account
+                </Button>
+              </Box>
             </Box>
           </Box>
         </Container>

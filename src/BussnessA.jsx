@@ -1,16 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Button, Fab } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import App from './App';
-import UerServices from './Services/services/UserServices';
-import Swal from 'sweetalert2';
-import { url } from './Services/services/url';
-import { useNavigate } from 'react-router-dom';
-import DetailsIcon from '@mui/icons-material/Details';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
-
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { Button, Fab, Typography } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import App from "./App";
+import UerServices from "./Services/services/UserServices";
+import Swal from "sweetalert2";
+import { url } from "./Services/services/url";
+import { useNavigate } from "react-router-dom";
+import DetailsIcon from "@mui/icons-material/Details";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 const BussnessA = () => {
   const [user, setuser] = React.useState([]);
   const navigate = useNavigate();
@@ -29,7 +28,7 @@ const BussnessA = () => {
             email: value.userId.email,
             phoneno: value.userId.phoneNo,
             categoryName: value.categoryId?.name,
-            userid: value.userId._id
+            userid: value.userId._id,
           }))
       );
     });
@@ -42,10 +41,10 @@ const BussnessA = () => {
         )
       );
       Swal.fire({
-        title: 'Detail',
-        text: status == 1 ? 'Approved' : 'Disaproved',
+        title: "Detail",
+        text: status == 1 ? "Approved" : "Disaproved",
 
-        confirmButtonText: 'Ok'
+        confirmButtonText: "Ok",
       });
     });
   };
@@ -70,41 +69,48 @@ const BussnessA = () => {
   };
   return (
     <App>
-      <h4 style={{ textAlign: 'center' }}>Business User</h4>
+      <Typography
+        component="h1"
+        variant="h4"
+        sx={{ fontFamily: "fantasy", textAlign: "center", py: 3 }}
+      >
+        Business User
+      </Typography>
 
-      <div style={{ width: '100%' }}>
+      <div style={{ width: "100%" }} className="table">
         <DataGrid
           autoHeight
           style={{
-            width: '100%',
-            color: 'green'
+            width: "100%",
+            color: "#000",
           }}
           columns={[
-            { field: 'firstName', width: 160 },
+            { field: "firstName", width: 160 },
 
-            { field: 'phoneno', width: 200 },
-            { field: 'email', width: 300 },
-
-            
+            { field: "phoneno", width: 200 },
+            { field: "email", width: 300 },
 
             {
-              field: 'actions',
-              headerName: 'Actions',
+              field: "actions",
+              headerName: "Actions",
               width: 400,
-              disableExport: true ,
+              disableExport: true,
 
               renderCell: (params) => {
                 return (
-                  <div style={{ width: '100%' }}>
-                    <DetailsIcon
-                      style={{ marginRight: '4px',fontSize:"30px" ,cursor:"pointer" }}
+                  <div style={{ width: "100%" }}>
+                    <RemoveRedEyeIcon
+                      style={{
+                        marginRight: "4px",
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        color: "#e2c657",
+                      }}
                       variant="contained"
-                      color="secondary"
                       onClick={() =>
                         viewdetail(
                           params.row.address,
                           params.row.specialist,
-
                           params.row.fightName,
                           params.row.fightRecord,
                           params.row.titles,
@@ -116,20 +122,15 @@ const BussnessA = () => {
                       }
                     >
                       View Detail
-                    </DetailsIcon>
-
-               
+                    </RemoveRedEyeIcon>
                   </div>
                 );
-              }
-            }
+              },
+            },
           ]}
           rows={user}
           pageSize={8}
           rowsPerPageOptions={[8]}
-          components={{
-            Toolbar: GridToolbar
-          }}
         />
       </div>
     </App>
