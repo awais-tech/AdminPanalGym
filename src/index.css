@@ -1,0 +1,26 @@
+.css-3ihp42-MuiDataGrid-root .MuiDataGrid-cell {
+  white-space: wrap !important;
+}
+.image-item {
+  display: flex;
+  margin: 10px 0;
+}
+.swal2-container{
+  z-index:2000 !important;
+  position: absolute !important;
+}
+.image-item__btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+button {
+  height: 40px;
+}
+/* .MuiDataGrid-row.Mui-odd {
+  background-color: green !important;
+}
+.MuiDataGrid-row:nth-child(even){
+  background-color: rgba(144, 238, 180,0.6) !important ;
+
+} */
