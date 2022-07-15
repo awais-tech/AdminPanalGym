@@ -18,6 +18,7 @@ import * as yup from "yup";
 import UerServices from "../Services/services/UserServices";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import emailjs, { send } from "@emailjs/browser";
 function Copyright(props) {
   return (
     <Typography
@@ -81,19 +82,36 @@ export default function SignUp() {
     validationSchema: validation,
     onSubmit: async (values) => {
       // 625e92f6c79665679583d09b
-      console.log(values);
+      // console.log(values);
       try {
-        const data = await UerServices.Register(
-          values.name,
-          values.LastName,
-          values.email,
-          values.password,
-          values.confirmPassword,
-          values.phoneNo,
-          "trainer"
-        );
+        // const data = await UerServices.Register(
+        //   values.name,
+        //   values.LastName,
+        //   values.email,
+        //   values.password,
+        //   values.confirmPassword,
+        //   values.phoneNo,
+        //   "trainer"
+        // );
         toast.success("Account has been created");
-        navigate(-1);
+        // navigate(-1);
+        emailjs
+          .send(
+            "service_jwf5a3f",
+            "template_rmrcsnl",
+            values,
+            "niEjuz2Sc6Xj_g_4j"
+          )
+          .then(
+            (result) => {
+              console.log(result);
+              console.log(result.text);
+            },
+            (error) => {
+              console.log(error);
+              console.log(error.text);
+            }
+          );
       } catch (e) {
         toast.error(e.error);
       }
