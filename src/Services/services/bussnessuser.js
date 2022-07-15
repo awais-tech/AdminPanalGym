@@ -12,6 +12,9 @@ class BussnessServices extends GenericServices {
   getSingleBussness = (id) => {
     return this.get("Bussness/"+id);
   };
+ deleteBussness = (id) => {
+    return this.delete("Bussness/"+id);
+  };
   updateBussness = (id,data) => {
     return this.put("Bussness/"+id,data);
   };

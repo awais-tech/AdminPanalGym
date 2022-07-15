@@ -10,9 +10,25 @@ import { url } from "./Services/services/url";
 import { useNavigate } from "react-router-dom";
 import DetailsIcon from "@mui/icons-material/Details";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import DeleteIcon from '@mui/icons-material/Delete';
+import bussnessServices from "./Services/services/bussnessuser";
 const BussnessA = () => {
   const [user, setuser] = React.useState([]);
   const navigate = useNavigate();
+  const deleteS = (id,users) => {
+    bussnessServices.deleteBussness(id).then((value) => {
+      setuser(user.filter((val) => val.id != id));
+      UerServices.updateuser(users, 0).then((val) => {
+        Swal.fire({
+          title: "Delete Succesfully",
+          text: "Trainer Profile is deleted",
+  
+          confirmButtonText: "Ok",
+        });
+      });
+     
+    });
+  };
   React.useEffect(() => {
     UerServices.getbussnessUser().then((val) => {
       console.log(val);
@@ -123,6 +139,13 @@ const BussnessA = () => {
                     >
                       View Detail
                     </RemoveRedEyeIcon>
+                  <DeleteIcon    onClick={() => deleteS(params.row.id,params.row.userId._id)} 
+                  style={{
+                        marginRight: "4px",
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        color: "#e2c657",
+                      }}></DeleteIcon>
                   </div>
                 );
               },
