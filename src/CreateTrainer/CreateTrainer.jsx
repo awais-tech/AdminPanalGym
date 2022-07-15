@@ -84,17 +84,17 @@ export default function SignUp() {
       // 625e92f6c79665679583d09b
       // console.log(values);
       try {
-        // const data = await UerServices.Register(
-        //   values.name,
-        //   values.LastName,
-        //   values.email,
-        //   values.password,
-        //   values.confirmPassword,
-        //   values.phoneNo,
-        //   "trainer"
-        // );
+        const data = await UerServices.Register(
+          values.name,
+          values.LastName,
+          values.email,
+          values.password,
+          values.confirmPassword,
+          values.phoneNo,
+          "trainer"
+        );
         toast.success("Account has been created");
-        // navigate(-1);
+        navigate(-1);
         emailjs
           .send(
             "service_jwf5a3f",
