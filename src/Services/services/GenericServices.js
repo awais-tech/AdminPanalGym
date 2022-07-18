@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3000/api/";
+axios.defaults.baseURL = "https://dadogymbackend.herokuapp.com/api/";
 axios.defaults.headers.common["x-auth-token"] = localStorage.getItem("Token");
 class GenericServices {
   get = (url) =>
@@ -28,7 +28,7 @@ class GenericServices {
     postconfig = (url, data, config) =>
     new Promise((resolve, reject) => {
       axios
-        .post('http://localhost:3000/api/'+url, data, config)
+        .post(url, data, config)
         .then((res) => {
           resolve(res.data);
         })
