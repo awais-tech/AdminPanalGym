@@ -10,6 +10,8 @@ import { url } from "./Services/services/url";
 import { useNavigate } from "react-router-dom";
 import DetailsIcon from "@mui/icons-material/Details";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import DeleteIcon from '@mui/icons-material/Delete';
 const BussnessUser = () => {
   const [user, setuser] = React.useState([]);
   const navigate = useNavigate();
@@ -26,7 +28,17 @@ const BussnessUser = () => {
       );
     });
   }, []);
+  const deleteS = (id) => {
+    UerServices.deleteuser(id).then((value) => {
+      setuser(user.filter((val) => val.id != id));
+      Swal.fire({
+        title: "Delete Succesfully",
+        text: "User is delete",
 
+        confirmButtonText: "Ok",
+      });
+    });
+  };
   return (
     <App>
       <Typography
@@ -57,11 +69,21 @@ const BussnessUser = () => {
 
               renderCell: (params) => {
                 return (
+                  <>
                   <Button
                     onClick={() => navigate("/Profile/" + params.row._id)}
                   >
                     <AddBoxIcon sx={{ color: "#e2c657" }} />
                   </Button>
+                   <DeleteIcon    onClick={() => deleteS(params.row.id)} 
+                   style={{
+                         marginRight: "4px",
+                         fontSize: "25px",
+                         cursor: "pointer",
+                         color: "#e2c657",
+                       }}></DeleteIcon>
+
+</>
                 );
               },
             },
