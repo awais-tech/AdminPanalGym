@@ -4,6 +4,8 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { Button, Fab, Typography } from "@mui/material";
 
 import App from "./App";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 import { Navigate, useParams, useNavigate } from "react-router-dom";
 import bookings from "./Services/services/Booking";
@@ -16,7 +18,20 @@ const Booking = () => {
   const [booking, setBooking] = React.useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const deleteS = (id,users) => {
+    bookings.deleteAdminBooking(id).then((value) => {
+      setBooking(booking.filter((val) => val.id != id));
+   
+        Swal.fire({
+          title: "Delete Succesfully",
+          text: "Booking  is deleted",
+  
+          confirmButtonText: "Ok",
+        });
+   
+     
+    });
+  };
   const viewUser = (user) => {
     console.log(user);
     Swal.fire({
@@ -130,6 +145,13 @@ const Booking = () => {
                       : params.row.status == 2
                       ? "Rejected"
                       : "Canceled"}
+                        <DeleteIcon    onClick={() => deleteS(params.row.id)} 
+                  style={{
+                        marginRight: "4px",
+                        fontSize: "25px",
+                        cursor: "pointer",
+                        color: "#e2c657",
+                      }}></DeleteIcon>
                   </div>
                 );
               },

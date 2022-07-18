@@ -10,6 +10,10 @@ class BookingServices extends GenericServices {
     return this.get('booking/AdminBookings/all');
   };
 
+ deleteAdminBooking = (id) => {
+    return this.delete('booking/AdminDelete/'+id);
+  };
+  
 
   // deleteProduct = (_id) => {
   //   return this.delete("products/" + _id);
