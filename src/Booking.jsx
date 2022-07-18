@@ -18,7 +18,7 @@ const Booking = () => {
   const [booking, setBooking] = React.useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
-  const deleteS = (id,users) => {
+  const deleteS = (id) => {
     bookings.deleteAdminBooking(id).then((value) => {
       setBooking(booking.filter((val) => val.id != id));
    
