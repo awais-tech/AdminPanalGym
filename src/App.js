@@ -72,7 +72,7 @@ const App = ({ children }) => {
       <Divider />
       <List>
         {["Content Management"].map((text, index) => (
-          <ListItem button key={text} onClick={() => window.location.href="https://dadogymbackend.herokuapp.com/"}>
+          <ListItem button key={text} onClick={() => window.location.href="https://gymadmin.thecherrybyte.com/admin"}>
             <ListItemIcon style={{ color: "white" }}>
               <PersonIcon />
             </ListItemIcon>
