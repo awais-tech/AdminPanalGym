@@ -76,7 +76,7 @@ export default function SignInSide() {
           //   backgroundPosition: "center",
           // }}
         >
-          <img src="../1.jpg" alt="" style={{ width: "100%" }} />
+          <img src="../DadoAdmin.png" alt="" style={{ width: "100%" }} />
         </Grid>
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box

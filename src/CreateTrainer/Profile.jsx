@@ -227,7 +227,7 @@ export default function Profile() {
                     required
                     fullWidth
                     name="medal"
-                    label="medal"
+                    label="Experience"
                     type="medal"
                     id="medal"
                     value={formik.values.medal}
@@ -255,7 +255,7 @@ export default function Profile() {
                     required
                     fullWidth
                     name="monthyFees"
-                    label="monthyFees"
+                    label="Per Hour Fees"
                     type="monthyFees"
                     id="monthyFees"
                     value={formik.values.monthyFees}
