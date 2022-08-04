@@ -73,8 +73,8 @@ const BussnessA = () => {
           <div style="font-weight:bold">fightName:${c}</div>
           <div style="font-weight:bold">fightRecord:${d}</div>
           <div style="font-weight:bold">titles:${e}</div>
-          <div style="font-weight:bold">monthyFees:${f}</div>
-          <div style="font-weight:bold">medal:${g}</div>
+          <div style="font-weight:bold">Per Hour Fees:${f}</div>
+          <div style="font-weight:bold">Experience:${g}</div>
           <div style="font-weight:bold">about:${h}</div>
           
           <img src="${url}${i}" width="25%" />

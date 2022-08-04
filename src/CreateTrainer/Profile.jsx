@@ -37,8 +37,8 @@ const validation = Yup.object({
     .required()
     .typeError("you must specify a number")
 
-    .required("monthyFees is required"),
-  medal: Yup.string().required("medal is required"),
+    .required("Per Hours Fees is required"),
+  medal: Yup.string().required("Experience is required"),
   about: Yup.string().required("about is required"),
 });
 
