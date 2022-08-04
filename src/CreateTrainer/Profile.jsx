@@ -95,7 +95,7 @@ export default function Profile() {
           });
         });
 
-        navigate(-1);
+     
         toast.success("Account has been created");
       } catch (e) {
         toast.error(e.error);
